@@ -52,9 +52,9 @@ VALUES
   (6, "Stray Cat", NULL);
 
 INSERT INTO
-  statuses (id, cat_id, text) 
+  statuses (id, text, cat_id) 
 VALUES
-  (1, 1, "Curie loves string!"),
-  (2, 2, "Markov is mighty!"),
-  (3, 1, "Curie is cool!")
+  (1, "Curie loves string!", 1),
+  (2, "Markov is mighty!", 2),
+  (3, "Curie is cool!", 1);
 
