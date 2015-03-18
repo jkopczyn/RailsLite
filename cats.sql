@@ -44,8 +44,17 @@ VALUES
 INSERT INTO
   cats (id, name, owner_id)
 VALUES
-  (1, "Breakfast", 1),
-  (2, "Earl", 2),
-  (3, "Haskell", 3),
-  (4, "Markov", 3),
-  (5, "Stray Cat", NULL);
+  (1, "Curie", 1),
+  (2, "Markov", 3),
+  (3, "Breakfast", 1),
+  (4, "Earl", 2),
+  (5, "Haskell", 3),
+  (6, "Stray Cat", NULL);
+
+INSERT INTO
+  statuses (id, cat_id, text) 
+VALUES
+  (1, 1, "Curie loves string!"),
+  (2, 2, "Markov is mighty!"),
+  (3, 1, "Curie is cool!")
+
