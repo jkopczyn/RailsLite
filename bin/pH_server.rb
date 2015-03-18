@@ -1,39 +1,8 @@
 require 'webrick'
 require_relative '../lib/phaseHigher/controller_base'
 require_relative '../lib/phaseHigher/router'
+require_relative 'classes.rb'
 
-
-# http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick.html
-# http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick/HTTPRequest.html
-# http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick/HTTPResponse.html
-# http://www.ruby-doc.org/stdlib-2.0/libdoc/webrick/rdoc/WEBrick/Cookie.html
-
-$cats = [
-  { id: 1, name: "Curie" },
-  { id: 2, name: "Markov" }
-]
-
-$statuses = [
-  { id: 1, cat_id: 1, text: "Curie loves string!" },
-  { id: 2, cat_id: 2, text: "Markov is mighty!" },
-  { id: 3, cat_id: 1, text: "Curie is cool!" }
-]
-
-class StatusesController < Phase6::ControllerBase
-  def index
-    statuses = $statuses.select do |s|
-      s[:cat_id] == Integer(params[:cat_id])
-    end
-
-    render_content(statuses.to_s, "text/text")
-  end
-end
-
-class Cats2Controller < Phase6::ControllerBase
-  def index
-    render_content($cats.to_s, "text/text")
-  end
-end
 
 router = Phase6::Router.new
 router.draw do

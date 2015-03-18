@@ -1,3 +1,11 @@
+CREATE TABLE statuses (
+  id INTEGER PRIMARY KEY NOT NULL,
+  text VARCHAR(255) NOT NULL,
+  cat_id INTEGER NOT NULL,
+
+  FOREIGN KEY(cat_id) REFERENCES cat(id)
+);
+
 CREATE TABLE cats (
   id INTEGER PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
@@ -12,7 +20,7 @@ CREATE TABLE humans (
   lname VARCHAR(255) NOT NULL,
   house_id INTEGER,
 
-  FOREIGN KEY(house_id) REFERENCES human(id)
+  FOREIGN KEY(house_id) REFERENCES house(id)
 );
 
 CREATE TABLE houses (
