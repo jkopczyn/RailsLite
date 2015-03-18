@@ -1,5 +1,6 @@
 require_relative '../phase6/controller_base'
-require_relative '../phase6/router'
+require_relative '../active_record_lite/04_associatable2.rb'
+require_relative 'router'
 
 module PhaseHigher
   class ControllerBase < Phase6::ControllerBase
@@ -35,10 +36,6 @@ module PhaseHigher
       @later[key]=value
       @now[key]=value
     end
-#
-#    def now[]=(key,value)
-#      @now[key]=value
-#    end
     
     def store_session(res)
       cookie = WEBrick::Cookie.new("_rails_lite_flash", @later.to_json)
