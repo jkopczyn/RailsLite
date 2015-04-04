@@ -4,12 +4,12 @@ require_relative '../lib/phaseHigher/router'
 require_relative 'classes.rb'
 
 
-router = PhaseHigher::Router.new
+router = Phase6::Router.new
 router.draw do
-  get "/cats", CatsController, :index
-  get "/cats/:cat_id/statuses", StatusesController, :index
-  get "/", CatsController, :index
-  get "/cat/:id", CatsController, :show
+  get Regexp.new("^/cats$"), CatsController, :index
+  get Regexp.new("^/cats/(?<cat_id>\\d+)/statuses$"), StatusesController, :index
+  get Regexp.new("^/?$"), CatsController, :index
+  get Regexp.new("^/cat/(?<id>\\d+)$"), CatsController, :show
 end
 
 server = WEBrick::HTTPServer.new(Port: 3000)

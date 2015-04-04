@@ -1,6 +1,7 @@
 module Phase6
   class Route
     attr_reader :pattern, :http_method, :controller_class, :action_name
+    attr_reader :path, :regex
 
     def initialize(pattern, http_method, controller_class, action_name)
       @pattern, @http_method, @controller_class, @action_name =
@@ -9,6 +10,7 @@ module Phase6
 
     # checks if pattern matches path and method matches request method
     def matches?(req)
+      debugger
       !!(@pattern =~ req.path) && 
           req.request_method.downcase.to_sym == http_method
     end
