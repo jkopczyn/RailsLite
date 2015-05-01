@@ -31,14 +31,14 @@ class Cat < SQLObject
   finalize!
 end
 
-class StatusesController < PhaseHigher::ControllerBase
+class StatusesController < ControllerBase
   def index
     statuses = Status.where({cat_id: params[:cat_id]})
     render_content(statuses.to_json, "text/json")
   end
 end
 
-class CatsController < PhaseHigher::ControllerBase
+class CatsController < ControllerBase
   def index
     @cats = Cat.all.map { |cat| cat.attributes.to_json }.join(",\n")
     render :index
