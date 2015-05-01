@@ -1,13 +1,12 @@
 require 'webrick'
-require 'phase6/controller_base'
-require 'phase6/router'
+require 'phaseHigher/controller_base'
 
 describe "the symphony of things" do
   let(:req) { WEBrick::HTTPRequest.new(Logger: nil) }
   let(:res) { WEBrick::HTTPResponse.new(HTTPVersion: '1.0') }
 
   before(:all) do
-    class Ctrlr < Phase6::ControllerBase
+    class Ctrlr < PhaseHigher::ControllerBase
       def route_render
         render_content("testing", "text/html")
       end
@@ -46,7 +45,7 @@ describe "the symphony of things" do
     let(:ctrlr) { Ctrlr.new(req, res) }
 
     it "exposes a session via the session method" do
-      ctrlr.session.should be_instance_of(Phase4::Session)
+      ctrlr.session.should be_instance_of(PhaseHigher::Session)
     end
 
     it "saves the session after rendering content" do
