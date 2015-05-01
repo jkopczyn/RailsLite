@@ -1,22 +1,22 @@
 require 'webrick'
-require 'phaseHigher/session'
-require 'phaseHigher/controller_base'
+require 'session'
+require 'controller_base'
 
-describe PhaseHigher::Session do
+describe Session do
   let(:req) { WEBrick::HTTPRequest.new(Logger: nil) }
   let(:res) { WEBrick::HTTPResponse.new(HTTPVersion: '1.0') }
   let(:cook) { WEBrick::Cookie.new('_rails_lite_app', { xyz: 'abc' }.to_json) }
 
   it "deserializes json cookie if one exists" do
     req.cookies << cook
-    session = PhaseHigher::Session.new(req)
+    session = Session.new(req)
     session['xyz'].should == 'abc'
   end
 
   describe "#store_session" do
     context "without cookies in request" do
       before(:each) do
-        session = PhaseHigher::Session.new(req)
+        session = Session.new(req)
         session['first_key'] = 'first_val'
         session.store_session(res)
       end
@@ -39,12 +39,12 @@ describe PhaseHigher::Session do
       end
 
       it "reads the pre-existing cookie data into hash" do
-        session = PhaseHigher::Session.new(req)
+        session = Session.new(req)
         session['pho'].should == 'soup'
       end
 
       it "saves new and old data to the cookie" do
-        session = PhaseHigher::Session.new(req)
+        session = Session.new(req)
         session['machine'] = 'mocha'
         session.store_session(res)
         cookie = res.cookies.find { |c| c.name == '_rails_lite_app' }
@@ -56,9 +56,9 @@ describe PhaseHigher::Session do
   end
 end
 
-describe PhaseHigher::ControllerBase do
+describe ControllerBase do
   before(:all) do
-    class CatsController < PhaseHigher::ControllerBase
+    class CatsController < ControllerBase
     end
   end
   after(:all) { Object.send(:remove_const, "CatsController") }
@@ -69,7 +69,7 @@ describe PhaseHigher::ControllerBase do
 
   describe "#session" do
     it "returns a session instance" do
-      expect(cats_controller.session).to be_a(PhaseHigher::Session)
+      expect(cats_controller.session).to be_a(Session)
     end
 
     it "returns the same instance on successive invocations" do
