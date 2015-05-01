@@ -2,6 +2,7 @@ require_relative 'active_record_lite/sql_object.rb'
 require_relative 'router'
 require_relative './params'
 require_relative './session'
+require 'byebug'
 
 class ControllerBase 
   attr_reader :params, :req, :res
@@ -33,6 +34,7 @@ class ControllerBase
   end
 
   def render(template_name)
+    debugger
     template = ERB.new(File.read(
       "views/#{self.class.to_s.underscore}/#{template_name}.html.erb"))
     render_content(template.result(binding),"text/html")

@@ -48,4 +48,18 @@ class CatsController < ControllerBase
     @cat = (Cat.where({id: params[:id]})).first
     render :show
   end
+
+  def create
+    @cat = Cat.new(params["cat"])
+    if @cat.save
+      redirect_to("/cats")
+    else
+      render :new
+    end
+  end
+
+  def new
+    @cat = Cat.new
+    render :new
+  end
 end
