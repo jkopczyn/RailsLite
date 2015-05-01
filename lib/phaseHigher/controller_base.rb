@@ -6,12 +6,11 @@ require_relative './session'
 
 module PhaseHigher
   class ControllerBase 
-    attr_reader :params
+    attr_reader :params, :req, :res
 
     # setup the controller
     def initialize(req, res, route_params = {})
       @req, @res = req, res
-      debugger
       @already_built_response = false
       @params= Params.new(req, route_params)
     end
@@ -38,7 +37,6 @@ module PhaseHigher
     def render(template_name)
       template = ERB.new(File.read(
         "views/#{self.class.to_s.underscore}/#{template_name}.html.erb"))
-      debugger
       render_content(template.result(binding),"text/html")
     end
 
