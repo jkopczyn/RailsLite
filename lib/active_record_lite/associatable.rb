@@ -1,8 +1,6 @@
-require_relative '03_associatable'
+require_relative 'assoc_options'
 
-# Phase IV
 module Associatable
-  # Remember to go back to 04_associatable to write ::assoc_options
 
   def has_one_through(name, through_name, source_name)
     through_options = assoc_options[through_name.to_sym]
@@ -26,9 +24,4 @@ module Associatable
         return source_options.model_class.parse_all(result).first
     end
   end
-end
-
-class SQLObject
-  extend Associatable
-  extend Searchable
 end

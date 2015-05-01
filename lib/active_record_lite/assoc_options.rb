@@ -1,11 +1,9 @@
-require_relative '02_searchable'
 require 'active_support/inflector'
 
 ActiveSupport::Inflector.inflections do |inflect|
   inflect.irregular 'human', 'humans'
 end
 
-# Phase IIIa
 class AssocOptions
   attr_accessor(
     :foreign_key,
@@ -43,7 +41,6 @@ class HasManyOptions < AssocOptions
 end
 
 module Associatable
-  # Phase IIIb
   def belongs_to(name, options = {})
     assoc_options[name.to_sym] = BelongsToOptions.new(name, options)
     options = assoc_options[name.to_sym]
@@ -66,8 +63,4 @@ module Associatable
   def assoc_options
     @assoc_options ||= {}
   end
-end
-
-class SQLObject
-  extend Associatable
 end
