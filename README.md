@@ -1,20 +1,23 @@
-# w5d2: [Rails Lite!][description]
+# RailsLite
 
-## Using The Specs
+A micropoject in Ruby metaprogramming to create the basics of Rails and
+ActiveRecord from scratch.
 
-Some specs have been written to guide you towards the lite. There are
-rspec specs in the `spec` directory and demo servers for you to try
-in the `bin` directory.
+## Key Features
 
-## Suggested Order
+  * In ActiveRecord: Searchable and Associatable make it possible to look up
+    models in the database by fields and associations.
+  * `ControllerBase#render` includes some neat metaprogramming to find and fill
+    the view template for any action
+  * `Route#run` maps routes to actions and dynamically generates a Controller to
+    finish executing
 
-0.  `bundle exec rspec spec/p02_controller_spec.rb`
-0.  `bundle exec rspec spec/p03_template_spec.rb`
-0.  `bundle exec rspec spec/p04_session_spec.rb`
-0.  `bundle exec rspec spec/p05_params_spec.rb`
-0.  `bundle exec rspec spec/p06_router_spec.rb`
-0.  `bundle exec rspec spec/p07_integration_spec.rb`
+## Running the Code
 
-Run `bundle exec rspec` to run all the spec files.
+The specs used to test that the code matched the behavior of the Rails
+equivalents; these can be found in `/spec` and should be run with `bundle exec rspec spec/`.
 
-[description]: https://github.com/appacademy/rails-curriculum/blob/master/projects/w5d2-rails-lite-i.md
+For a live demo, a few servers have been provided in `/bin`. These should be run
+from the root directory with `ruby bin/<server-name>.rb`.
+
+

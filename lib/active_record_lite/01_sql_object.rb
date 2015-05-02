@@ -1,11 +1,13 @@
 require_relative 'db_connection'
 require 'active_support/inflector'
 require 'byebug'
-
-# NB: the attr_accessor we wrote in phase 0 is NOT used in the rest
-# of this project. It was only a warm up.
+require_relative '02_searchable'
+require_relative '04_associatable2'
 
 class SQLObject
+  extend Searchable
+  extend Associatable
+  
   def self.columns
     cols = DBConnection.execute2(<<-SQL) 
     SELECT
@@ -82,7 +84,6 @@ class SQLObject
   end
 
   def initialize(params = {})
-    # ...
     params.keys.each do |key|
       sym_key = key.to_sym
       unless self.class.columns.include?(sym_key) 
